@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package test;
+
+import "buf/validate/validate.proto";
+import "import.proto";
+
+message TestInt32Rules {
+  optional int32 test = 1 [
+    (buf.validate.field).int32.lt = 5,
+    (buf.validate.field).int32.(custom.abs_not_in) = 1,
+    (buf.validate.field).int32.(custom.abs_not_in) = -2
+  ];
+}

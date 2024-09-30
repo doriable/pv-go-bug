@@ -12,3 +12,11 @@ message TestInt32Rules {
     (buf.validate.field).int32.(custom.abs_not_in) = -2
   ];
 }
+
+message TestInt32RulesNoPredefined {
+  optional int32 test = 1 [
+    (buf.validate.field).int32.lt = 5,
+    (buf.validate.field).int32.not_in = 1,
+    (buf.validate.field).int32.not_in = -2
+  ];
+}

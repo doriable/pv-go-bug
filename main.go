@@ -16,12 +16,23 @@ import (
 func main() {
 	protoregistry.GlobalFiles = new(protoregistry.Files)
 	protoregistry.GlobalTypes = new(protoregistry.Types)
-	msg := &pb.TestInt32Rules{
-		Test: proto.Int32(5),
+	// failing message
+	// msg := &pb.TestInt32Rules{
+	// 	Test: proto.Int32(5),
+	// }
+	// desc := msg.ProtoReflect().Descriptor()
+	// dynamicMsg := dynamicpb.NewMessage(desc)
+	// msg.ProtoReflect().Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+	// 	dynamicMsg.Set(fd, v)
+	// 	return true
+	// })
+
+	control := &pb.TestInt32RulesNoPredefined{
+		Test: proto.Int32(4),
 	}
-	desc := msg.ProtoReflect().Descriptor()
+	desc := control.ProtoReflect().Descriptor()
 	dynamicMsg := dynamicpb.NewMessage(desc)
-	msg.ProtoReflect().Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+	control.ProtoReflect().Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
 		dynamicMsg.Set(fd, v)
 		return true
 	})
